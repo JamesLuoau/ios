@@ -19,7 +19,7 @@ class RecordAudioViewController: UIViewController, AVAudioRecorderDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        stopButton.isEnabled = false
     }
 
     override func didReceiveMemoryWarning() {
