@@ -30,6 +30,11 @@ class RecordAudioViewController: UIViewController, AVAudioRecorderDelegate {
     func audioRecorderDidFinishRecording(_ recorder: AVAudioRecorder, successfully flag: Bool) {
         performSegue(withIdentifier: "playAudio", sender: audioRecorder.url)
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let playSoundViewController = segue.destination as? PlaySoundsViewController
+        playSoundViewController?.recordedAudioURL = sender as? URL
+    }
 
 
     @IBAction func recordAudio(_ sender: Any, forEvent event: UIEvent) {
@@ -41,8 +46,7 @@ class RecordAudioViewController: UIViewController, AVAudioRecorderDelegate {
         let recordingName = "recordedVoice.wav"
         let pathArray = [dirPath, recordingName]
         let filePath = URL(string: pathArray.joined(separator: "/"))
-        print(filePath?.absoluteString)
-        
+
         let session = AVAudioSession.sharedInstance()
         try! session.setCategory(AVAudioSessionCategoryPlayAndRecord, with:AVAudioSessionCategoryOptions.defaultToSpeaker)
         
