@@ -16,10 +16,16 @@ class RecordAudioViewController: UIViewController, AVAudioRecorderDelegate {
     @IBOutlet weak var label: UILabel!
     @IBOutlet weak var stopButton: UIButton!
     @IBOutlet weak var recordButton: UIButton!
+    @IBOutlet weak var navigationBar: UINavigationItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         stopButton.isEnabled = false
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        // self.navigationController?.navigationBar.isHidden = false
     }
 
     override func didReceiveMemoryWarning() {

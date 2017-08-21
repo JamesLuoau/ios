@@ -4,6 +4,7 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13156.2"/>
         <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -54,9 +55,10 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
-                    <navigationItem key="navigationItem" id="VUm-2C-88G"/>
+                    <navigationItem key="navigationItem" id="VUm-2C-88G" userLabel="Navigation Bar"/>
                     <connections>
                         <outlet property="label" destination="2C1-Y0-eHH" id="84u-V8-dIJ"/>
+                        <outlet property="navigationBar" destination="VUm-2C-88G" id="pfm-40-FgA"/>
                         <outlet property="recordButton" destination="l5a-lJ-4Gf" id="I4W-LX-RYf"/>
                         <outlet property="stopButton" destination="0Zd-Jp-3h4" id="fhd-kg-DGE"/>
                         <segue destination="cu8-Ne-z7U" kind="show" identifier="playAudio" id="Kgm-Wf-Ica"/>
@@ -206,6 +208,9 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="A7M-bf-rz3">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
                     <connections>
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="W7H-E0-yJg"/>
                     </connections>
