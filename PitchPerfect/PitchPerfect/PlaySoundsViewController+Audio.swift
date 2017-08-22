@@ -42,7 +42,7 @@ extension PlaySoundsViewController: AVAudioPlayerDelegate {
         }
     }
     
-    func playSound(rate: Float? = nil, pitch: Float? = nil, echo: Bool = false, reverb: Bool = false) {
+    func playSound(_ rate: Float? = nil, pitch: Float? = nil, echo: Bool = false, reverb: Bool = false) {
         
         // initialize audio engine components
         audioEngine = AVAudioEngine()
@@ -106,7 +106,7 @@ extension PlaySoundsViewController: AVAudioPlayerDelegate {
         do {
             try audioEngine.start()
         } catch {
-            showAlert(Alerts.AudioEngineError, message: String(describing: error))
+            showAlert(Alerts.AudioEngineError, message: String(error))
             return
         }
         
