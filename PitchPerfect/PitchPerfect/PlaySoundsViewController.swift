@@ -36,7 +36,16 @@ class PlaySoundsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        changeButtonImageToScaleAspectFit(snailButton, chipmunkButton, rabbitButton, vaderButton, echoButton, reverbButton, stopButton)
+        
         setupAudio()
+    }
+    
+    private func changeButtonImageToScaleAspectFit(_ buttons: UIButton...) {
+        for button in buttons {
+            button.imageView?.contentMode = .scaleAspectFit
+        }
     }
     
     // MARK: Actions

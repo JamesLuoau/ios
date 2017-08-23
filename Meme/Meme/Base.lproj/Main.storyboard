@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="retina4_7" orientation="portrait">
+    <device id="retina3_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -19,27 +19,27 @@
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="UoX-fm-6vj">
-                                <rect key="frame" x="16" y="20" width="343" height="647"/>
+                                <rect key="frame" x="16" y="20" width="288" height="460"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="elL-pQ-pbM">
-                                        <rect key="frame" x="0.0" y="0.0" width="343" height="583"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="288" height="396"/>
                                     </imageView>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="GaT-db-Kif">
-                                        <rect key="frame" x="0.0" y="583" width="343" height="64"/>
+                                        <rect key="frame" x="0.0" y="396" width="288" height="64"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wbF-rQ-S6S">
-                                                <rect key="frame" x="0.0" y="0.0" width="171.5" height="64"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="144" height="64"/>
                                                 <state key="normal" title="Camera"/>
                                                 <connections>
                                                     <action selector="pickAnImage:" destination="BYZ-38-t0r" eventType="touchUpInside" id="RFE-o0-XSs"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9ap-V5-9Ss">
-                                                <rect key="frame" x="171.5" y="0.0" width="171.5" height="64"/>
+                                                <rect key="frame" x="144" y="0.0" width="144" height="64"/>
                                                 <state key="normal" title="Pick"/>
                                                 <connections>
                                                     <action selector="pickAnImage:" destination="BYZ-38-t0r" eventType="touchUpInside" id="AFr-RM-VFm"/>
@@ -52,17 +52,16 @@
                                     </stackView>
                                 </subviews>
                             </stackView>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="TOP MEMO" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="39v-PL-kvA" userLabel="Top Memo Text Field">
-                                <rect key="frame" x="139.5" y="60" width="96" height="30"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" text="TOP MEMO" borderStyle="roundedRect" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="39v-PL-kvA" userLabel="Top Memo Text Field">
+                                <rect key="frame" x="42" y="60" width="236" height="30"/>
                                 <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="40"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="next" enablesReturnKeyAutomatically="YES"/>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kFK-Xq-vOr" userLabel="Bottom Memo Text Field">
-                                <rect key="frame" x="139" y="318" width="97" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter your comments here" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="kFK-Xq-vOr" userLabel="Bottom Memo Text Field">
+                                <rect key="frame" x="-87" y="360" width="494" height="30"/>
                                 <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="40"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                         </subviews>
@@ -72,8 +71,10 @@
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="UoX-fm-6vj" secondAttribute="bottom" id="BqP-ul-TY3"/>
                             <constraint firstAttribute="trailingMargin" secondItem="UoX-fm-6vj" secondAttribute="trailing" id="F6F-Lk-ON0"/>
                             <constraint firstItem="UoX-fm-6vj" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="HGZ-dg-k4L"/>
-                            <constraint firstItem="39v-PL-kvA" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="NHf-O2-vfo"/>
-                            <constraint firstItem="39v-PL-kvA" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="40" id="eYn-gL-chU"/>
+                            <constraint firstItem="39v-PL-kvA" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="ZHq-GM-0YG"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="kFK-Xq-vOr" secondAttribute="bottom" constant="90" id="aJ0-St-fB1"/>
+                            <constraint firstItem="kFK-Xq-vOr" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="plZ-eO-oat"/>
+                            <constraint firstItem="39v-PL-kvA" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="40" id="uVa-WG-whS"/>
                         </constraints>
                     </view>
                     <connections>
