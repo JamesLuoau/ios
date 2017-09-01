@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class ViewController: UIViewController {
 
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var cameraButton: UIBarButtonItem!
@@ -19,22 +19,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let memeTextAttributes:[String:Any] = [
-            NSStrokeColorAttributeName: UIColor.black,
-            NSForegroundColorAttributeName: UIColor.white,
-            NSFontAttributeName: UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!,
-            NSStrokeWidthAttributeName: 4.0]
-        
-        topMemoTextField.defaultTextAttributes = memeTextAttributes
-        bottomTextField.defaultTextAttributes = memeTextAttributes
-        
-        
-        topMemoTextField.textAlignment = .center
-        bottomTextField.textAlignment = .center
-        
-        topMemoTextField.delegate = self
-        bottomTextField.delegate = self
-        
+        setupTextFields()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -47,63 +32,25 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         unsubscribeFromKeyboardNotifications()
     }
     
-    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        dismiss(animated: true, completion: nil)
-    }
-    
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        if let image = info["UIImagePickerControllerOriginalImage"] as? UIImage {
-            imageView.image = image
-        }
-        
-        dismiss(animated: true, completion: nil)
-    }
-
-
-    enum ImageSourceType: Int {
-        case fromCamera = 0
-        case fromLibrary
-        
-        func toUIImagePickerControllerSourceType() -> UIImagePickerControllerSourceType {
-            switch self {
-            case .fromCamera:
-                return UIImagePickerControllerSourceType.camera
-            case .fromLibrary:
-                return UIImagePickerControllerSourceType.photoLibrary
+    @IBAction func pickAnImage(_ sender: UIBarButtonItem) {
+        enum ImageSourceType: Int {
+            case fromCamera = 0
+            case fromLibrary = 1
+            
+            func toUIImagePickerControllerSourceType() -> UIImagePickerControllerSourceType {
+                switch self {
+                case .fromCamera:
+                    return UIImagePickerControllerSourceType.camera
+                case .fromLibrary:
+                    return UIImagePickerControllerSourceType.photoLibrary
+                }
             }
         }
-    }
-    
-    @IBAction func pickAnImage(_ sender: UIBarButtonItem) {
+        
         let imagePicker = UIImagePickerController()
         imagePicker.sourceType = ImageSourceType(rawValue: sender.tag)!.toUIImagePickerControllerSourceType()
         imagePicker.delegate = self
         present(imagePicker, animated: true, completion: nil)
-    }
-    
-    func keyboardWillShow(_ notification:Notification) {
-        view.frame.origin.y = 0 - getKeyboardHeight(notification)
-    }
-    
-    func keyboardWillHide(_ notification:Notification) {
-        view.frame.origin.y = 0
-    }
-    
-    func getKeyboardHeight(_ notification:Notification) -> CGFloat {
-        
-        let userInfo = notification.userInfo
-        let keyboardSize = userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue // of CGRect
-        return keyboardSize.cgRectValue.height
-    }
-    
-    func subscribeToKeyboardNotifications() {
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: .UIKeyboardWillShow, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: .UIKeyboardWillHide, object: nil)
-    }
-    
-    func unsubscribeFromKeyboardNotifications() {
-        NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillShow, object: nil)
-        NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillHide, object: nil)
     }
     
     func generateMemedImage() -> UIImage {
@@ -120,7 +67,52 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         
         return memedImage
     }
+    
+    @IBAction func shareMeme(_ sender: UIBarButtonItem) {
+        resignFirstResponderIfTextFieldsHasFocus()
+        
+        let activityViewController = UIActivityViewController(activityItems: [generateMemedImage()], applicationActivities: nil)
+        if UIDevice.current.userInterfaceIdiom == .phone {
+            present(activityViewController, animated: true, completion: nil)
+        }else{
+            let popover = activityViewController.popoverPresentationController
+            if (popover != nil){
+                popover?.barButtonItem = shareButton
+                popover?.permittedArrowDirections = UIPopoverArrowDirection.any
+                present(activityViewController, animated: true, completion: nil)
+            }
+        }
+        
+    }
+    
+    private func setupTextFields() {
+        let memeTextAttributes:[String:Any] = [
+            NSStrokeColorAttributeName: UIColor.black,
+            NSForegroundColorAttributeName: UIColor.white,
+            NSFontAttributeName: UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!,
+            NSStrokeWidthAttributeName: -4.0]
+        
+        topMemoTextField.defaultTextAttributes = memeTextAttributes
+        bottomTextField.defaultTextAttributes = memeTextAttributes
+        
+        topMemoTextField.textAlignment = .center
+        bottomTextField.textAlignment = .center
+        
+        topMemoTextField.delegate = self
+        bottomTextField.delegate = self
+    }
+    
+    private func resignFirstResponderIfTextFieldsHasFocus() {
+        if topMemoTextField.isFirstResponder {
+            topMemoTextField.resignFirstResponder()
+        }
+        if bottomTextField.isFirstResponder {
+            bottomTextField.resignFirstResponder()
+        }
+    }
 }
+
+// MARK: UITextFieldDelegate
 
 extension ViewController: UITextFieldDelegate {
 
@@ -134,6 +126,52 @@ extension ViewController: UITextFieldDelegate {
         }
     }
     
+}
+
+// MARK: Keyboard Functions
+
+extension ViewController {
+    func keyboardWillShow(_ notification:Notification) {
+        view.frame.origin.y = 0 - getKeyboardHeight(notification)
+    }
+    
+    func keyboardWillHide(_ notification:Notification) {
+        view.frame.origin.y = 0
+    }
+    
+    func getKeyboardHeight(_ notification:Notification) -> CGFloat {
+        let userInfo = notification.userInfo
+        let keyboardSize = userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue // of CGRect
+        return keyboardSize.cgRectValue.height
+    }
+    
+    func subscribeToKeyboardNotifications() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: .UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: .UIKeyboardWillHide, object: nil)
+    }
+    
+    func unsubscribeFromKeyboardNotifications() {
+        NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillHide, object: nil)
+    }
+}
+
+// MARK: UIImagePickerControllerDelegate & UINavigationControllerDelegate
+
+extension ViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        if let image = info["UIImagePickerControllerOriginalImage"] as? UIImage {
+            imageView.image = image
+        }
+        
+        dismiss(animated: true, completion: nil)
+    }
+
 }
 
 struct Meme {

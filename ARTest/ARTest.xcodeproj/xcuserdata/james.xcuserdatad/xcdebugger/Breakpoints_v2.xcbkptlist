@@ -6,32 +6,32 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "No"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Meme/ViewController.swift"
-            timestampString = "525231704.447294"
+            filePath = "ARTest/ViewController.swift"
+            timestampString = "525962257.647546"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "52"
-            endingLineNumber = "52"
-            landmarkName = "pickAnImage(_:)"
+            startingLineNumber = "93"
+            endingLineNumber = "93"
+            landmarkName = "renderer(_:didAdd:for:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "No"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Meme/ViewController.swift"
-            timestampString = "525231704.447294"
+            filePath = "ARTest/ViewController.swift"
+            timestampString = "525962257.647969"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "126"
-            endingLineNumber = "126"
-            landmarkName = "textFieldDidBeginEditing(_:)"
+            startingLineNumber = "103"
+            endingLineNumber = "103"
+            landmarkName = "renderer(_:didUpdate:for:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
